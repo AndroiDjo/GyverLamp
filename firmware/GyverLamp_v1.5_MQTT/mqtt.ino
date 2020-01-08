@@ -182,6 +182,14 @@ void MQTTcallback(char* topic, byte* payload, unsigned int length) {
 
   }
 
+  if (String(topic) == "homeassistant/light/"+clientId+"/text/set") {      
+      printText(Payload, CRGB::Green, true);
+      loadingFlag = true;
+      settChanged = true;
+      eepromTimer = millis();
+      MQTTUpdateState();
+  }
+
 }
 
 uint32_t timing = 0;
@@ -239,6 +247,8 @@ void MQTTreconnect() {
             mqttclient.subscribe(String("homeassistant/light/"+clientId+"/effect/scale/set").c_str());
 
             mqttclient.subscribe(String("homeassistant/light/"+clientId+"/state").c_str());
+
+            mqttclient.subscribe(String("homeassistant/light/"+clientId+"/text/set").c_str());
 
             MQTTUpdateState();
           

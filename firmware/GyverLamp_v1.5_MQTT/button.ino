@@ -57,11 +57,7 @@ if (ONflag && touch.isTriple()) {
  // вывод IP на лампу
   if (ONflag && touch.hasClicks()) {
     if (touch.getClicks() == 5) {
-      resetString();
-      while (!fillString(WiFi.localIP().toString(), CRGB::Green, true)) {
-        delay(1);
-        yield();
-      }
+      printText(WiFi.localIP().toString(), CRGB::Green, true);
     }
   }
 

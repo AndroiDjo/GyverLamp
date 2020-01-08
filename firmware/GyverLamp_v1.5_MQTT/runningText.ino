@@ -79,6 +79,19 @@ void drawLetter(uint8_t index, uint8_t letter, int16_t offset, CRGB textColor) {
   }
 }
 
+void printText(String text, CRGB textColor, boolean clear) {
+    #ifdef DEBUG
+    Serial.println("printText: ");
+    Serial.print(text);
+    #endif
+    
+    resetString();
+    while (!fillString(text, textColor, clear)) {
+      delay(1);
+      yield();
+    }
+}
+
 // ------------- СЛУЖЕБНЫЕ ФУНКЦИИ --------------
 
 // интерпретатор кода символа в массиве fontHEX (для Arduino IDE 1.8.* и выше)
