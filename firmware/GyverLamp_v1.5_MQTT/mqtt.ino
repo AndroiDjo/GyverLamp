@@ -183,7 +183,12 @@ void MQTTcallback(char* topic, byte* payload, unsigned int length) {
   }
 
   if (String(topic) == "homeassistant/light/"+clientId+"/text/set") {      
-      printText(Payload, CRGB::Green, true);
+      byte tc_r = getValue(Payload, ',', 0).toInt();
+      byte tc_g = getValue(Payload, ',', 1).toInt();
+      byte tc_b = getValue(Payload, ',', 2).toInt();
+      int text_time = getValue(Payload, ',', 3).toInt();
+      String text = getValue(Payload, ',', 4);
+      printTextContinuous(text, CRGB(tc_r, tc_g, tc_b), text_time);
       loadingFlag = true;
       settChanged = true;
       eepromTimer = millis();

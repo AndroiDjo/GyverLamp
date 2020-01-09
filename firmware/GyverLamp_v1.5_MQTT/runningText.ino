@@ -14,6 +14,7 @@
 
 int offset = WIDTH;
 uint32_t scrollTimer;
+uint32_t textTimer;
 
 void resetString() {
   offset = WIDTH;
@@ -90,6 +91,12 @@ void printText(String text, CRGB textColor, boolean clear) {
       delay(1);
       yield();
     }
+}
+
+void printTextContinuous(String text, CRGB textColor, int textTime) {
+  textTimer = millis();
+  while (millis() - textTimer <= textTime*1000)
+    printText(text, textColor, true);
 }
 
 // ------------- СЛУЖЕБНЫЕ ФУНКЦИИ --------------
