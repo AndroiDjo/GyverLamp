@@ -334,3 +334,9 @@ void lightersRoutine() {
   }
   }
 */
+
+// ----------------------------- ЧАСЫ ------------------------------
+void displayTime() {
+  CRGB color = CHSV(modes[18].scale * 2.5, 255, 255);
+  fillString(timeStr, color, true);
+}

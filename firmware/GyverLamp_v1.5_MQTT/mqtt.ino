@@ -42,6 +42,7 @@ int Get_EFFIDX (String effect) {
   if (effect.equals("Снегопад")) return 15;
   if (effect.equals("Матрица")) return 16;
   if (effect.equals("Светлячки")) return 17;
+  if (effect.equals("Часы")) return 18;
 
 }
 
@@ -66,6 +67,7 @@ String Get_EFFName (int eff_idx) {
     case 15: return "Снегопад";
     case 16: return "Матрица";
     case 17: return "Светлячки";
+    case 18: return "Часы";
   }
 
 }
