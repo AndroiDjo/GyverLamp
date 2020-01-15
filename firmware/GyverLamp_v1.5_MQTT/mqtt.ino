@@ -43,6 +43,7 @@ int Get_EFFIDX (String effect) {
   if (effect.equals("Матрица")) return 16;
   if (effect.equals("Светлячки")) return 17;
   if (effect.equals("Часы")) return 18;
+  if (effect.equals("Часы бегущей строкой")) return 19;
 
 }
 
@@ -68,6 +69,7 @@ String Get_EFFName (int eff_idx) {
     case 16: return "Матрица";
     case 17: return "Светлячки";
     case 18: return "Часы";
+    case 19: return "Часы бегущей строкой";
   }
 
 }

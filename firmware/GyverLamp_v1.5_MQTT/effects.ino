@@ -337,6 +337,19 @@ void lightersRoutine() {
 
 // ----------------------------- ЧАСЫ ------------------------------
 void displayTime() {
-  CRGB color = CHSV(modes[18].scale * 2.5, 255, 255);
+  boolean sec_tick = ((secs % 2) == 1);
+  String s_hrs = (hrs < 10) ? "0" : "";
+  s_hrs += String(hrs);
+  s_hrs += (sec_tick) ? "." : " ";
+  String s_mins = (mins < 10) ? "0" : "";
+  s_mins += String(mins);
+  s_mins += (sec_tick) ? "." : " ";
+  FastLED.clear();
+  drawString(s_hrs, CRGB(r, g, b), modes[18].scale, 9);
+  drawString(s_mins, CRGB(r, g, b), modes[18].scale, 1);
+}
+
+void displayTimeRunning() {
+  CRGB color = CHSV(modes[19].scale * 2.5, 255, 255);
   fillString(timeStr, color, true);
 }

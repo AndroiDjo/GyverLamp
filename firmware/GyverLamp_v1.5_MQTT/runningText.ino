@@ -7,7 +7,7 @@
 
 #define TEXT_HEIGHT 1     // высота, на которой бежит текст (от низа матрицы)
 #define LET_WIDTH 5       // ширина буквы шрифта
-#define LET_HEIGHT 8      // высота буквы шрифта
+#define LET_HEIGHT 7      // высота буквы шрифта
 #define SPACE 1           // пробел
 
 // --------------------- ДЛЯ РАЗРАБОТЧИКОВ ----------------------
@@ -34,7 +34,7 @@ boolean fillString(String text, CRGB textColor, boolean clear) {
       if ((byte)text[i] > 191) {    // работаем с русскими буквами!
         i++;
       } else {
-        drawLetter(j, text[i], offset + j * (LET_WIDTH + SPACE), textColor);
+        drawLetter(j, text[i], offset + j * (LET_WIDTH + SPACE), textColor, TEXT_HEIGHT);
         i++;
         j++;
       }
@@ -50,7 +50,21 @@ boolean fillString(String text, CRGB textColor, boolean clear) {
   return false;
 }
 
-void drawLetter(uint8_t index, uint8_t letter, int16_t offset, CRGB textColor) {
+void drawString(String text, CRGB textColor, int offset, int height) {
+  scrollTimer = millis();
+  byte i = 0, j = 0;
+  while (text[i] != '\0') {
+    if ((byte)text[i] > 191) {    // работаем с русскими буквами!
+      i++;
+    } else {
+      drawLetter(j, text[i], offset + j * (LET_WIDTH + SPACE), textColor, height);
+      i++;
+      j++;
+    }
+  }
+}
+
+void drawLetter(uint8_t index, uint8_t letter, int16_t offset, CRGB textColor, int height) {
   int8_t start_pos = 0, finish_pos = LET_WIDTH;
 
   if (offset < -LET_WIDTH || offset > WIDTH) return;
@@ -70,11 +84,11 @@ void drawLetter(uint8_t index, uint8_t letter, int16_t offset, CRGB textColor) {
 
       // рисуем столбец (i - горизонтальная позиция, j - вертикальная)
       if (TEXT_DIRECTION) {
-        if (thisBit) leds[getPixelNumber(offset + i, TEXT_HEIGHT + j)] = textColor;
-        //else drawPixelXY(offset + i, TEXT_HEIGHT + j, 0x000000);
+        if (thisBit) leds[getPixelNumber(offset + i, height + j)] = textColor;
+        //else drawPixelXY(offset + i, height + j, 0x000000);
       } else {
-        if (thisBit) leds[getPixelNumber(i, offset + TEXT_HEIGHT + j)] = textColor;
-        //else drawPixelXY(i, offset + TEXT_HEIGHT + j, 0x000000);
+        if (thisBit) leds[getPixelNumber(i, offset + height + j)] = textColor;
+        //else drawPixelXY(i, offset + height + j, 0x000000);
       }
     }
   }

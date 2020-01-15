@@ -390,6 +390,7 @@ void routeHome(){
           out += "<option value='16'>Матрица</option>";
           out += "<option value='17'>Светлячки</option>";
           out += "<option value='18'>Часы</option>";
+          out += "<option value='19'>Часы бегущей строкой</option>";
           
         out += "</select>";
       out += "</div>";

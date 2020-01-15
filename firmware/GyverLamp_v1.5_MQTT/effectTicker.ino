@@ -43,6 +43,8 @@ void effectsTick() {
           break;
         case 18: displayTime();
           break;
+        case 19: displayTimeRunning();
+          break;
       }
       FastLED.show();
     }
